@@ -5,10 +5,10 @@ echo on Azure Red Hat Enterprise Linux 8.5
 
 echo First attach a disk to vm
 
-echo fdisk /dev/device
+echo sudo fdisk /dev/sdc
 
 echo change type to Linux LVM
 
-vgextend rootvg /dev/sdc2
+echo sudo vgextend rootvg /dev/sdc1
 
-lvextend -r -L +10G /dev/rootvg/homelv 
+echo lvextend -r -L +20G /dev/rootvg/homelv 
