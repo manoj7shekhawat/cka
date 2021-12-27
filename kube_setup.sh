@@ -9,90 +9,97 @@ echo ########################################
 
 echo This script is written for Azure Red Hat 8.5 VM
 
-echo Script requires the machine where you run it to have 8GB of RAM or more
+echo Make sure we have 10 GB free in users home directory
+
+echo 8GB of RAM or more is recommended
 
 echo User must have sudo access
 
 echo press Enter to continue
 read
 
-echo STEP 1: Check for RHEL updates
+egrep '^flags.*(vmx|svm)' /proc/cpuinfo || (echo enable CPU virtualization support and try again && exit 9)
+
+echo Step 1: Update RHEL packages
 
 sudo dnf -y update
 
-echo STEP 2: Install KVM:
+echo Step 2: Installing KVM
 
 sudo dnf install -y @virt
 
-echo STEP 3: Install virtual machine management tools
+echo Step 3: Installing virtual machine management tools
 
 sudo dnf install -y libvirt-devel virt-top libguestfs-tools
 
-echo STEP 4: Enable and start KVM service
+echo Step 4: Enable and starting KVM service
 
 sudo systemctl enable --now libvirtd
 
-echo STEP 5: Install graphical virtual machine manager
+echo Step 5: Install graphical virtual machine manager
 
 sudo dnf install -y virt-manager
 
-echo STEP 6: Check that KVM is running
+echo Step 6: Check that KVM is running
 
-sudo systemctl status libvirtd
+sudo systemctl is-active --quiet libvirtd && echo libvirtd Service is running
 
-echo STEP 7:  Adding user should to the libvirt group:
+echo Step 7:  Adding user should to the libvirt group:
 
-sudo usermod -aG libvirt $(whoami)
+sudo usermod -aG libvirt `id -un`
 
-newgrp libvirt
+# newgrp libvirt
 
-echo STEP 8: Editing libvirtd.conf
+echo Step 8: Editing libvirtd.conf
 
 echo unix_sock_group = “libvirt” | sudo tee -a /etc/libvirt/libvirtd.conf
 
 echo unix_sock_rw_perms = “0770” | sudo tee -a /etc/libvirt/libvirtd.conf
 
-echo STEP 9: Restart the KVM service
+echo Step 9: Restart the KVM service
 
 sudo systemctl restart libvirtd.service
+sudo systemctl is-active --quiet libvirtd && echo libvirtd Service is running
 
-echho STEP 10: Downloading the latest minikube package
+echho Step 10: Downloading the latest minikube package
 
 sudo curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
 
-echo STEP 11: Installng minikube
+echo Step 11: Installng minikube
 
 sudo rpm -Uvh minikube-latest.x86_64.rpm
 
-echo STEP 12: Checking minikube version
+if rpm -q minikube-latest > /dev/null; then echo "Package minikube-latest is installed."; fi
+
+echo Step 12: Checking minikube version
 
 minikube version
 
-echo STEP 13: Download kubectl (check path to latest version on dl.k8s.io):
+echo Step 13: Download kubectl (check path to latest version on dl.k8s.io):
 
 curl -LO https://dl.k8s.io/release/v1.22.0/bin/linux/amd64/kubectl
 
-echo STEP 14: Installing kubectl
+echo Step 14: Installing kubectl
 
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 
-echo STEP 15: Check kubectl version to ensure successful install
+echo Step 15: Check kubectl version to ensure successful install
 
 kubectl version --client
 
-echo STEP 16: Typing “kubectl” gives a full list of commands
+echo Step 16: Typing “kubectl” gives a full list of commands
 
 kubectl
 
-echo STEP 17: Typing “minikube” gives a full list of commends
+echo Step 17: Typing “minikube” gives a full list of commends
 
 minikube
 
-echo STEP 18:  Creating a local minikube Kubernetes cluster
+echo Step 18:  Creating a local minikube Kubernetes cluster
 
-minikube start --vm-driver=kvm2
+minikube start --memory 4096 --vm-driver=kvm2
 
-echo STEP 19: Now running some kubectl commands to inspect the Kubernetes cluster
+echo Step 19: Now running some kubectl commands to inspect the Kubernetes cluster
 
 kubectl get nodes
 
