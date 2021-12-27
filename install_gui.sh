@@ -14,6 +14,7 @@ sudo dnf install langpacks-en glibc-all-langpacks -y
 
 sudo localectl set-locale LANG=en_US.utf8
 
+# Export LANG before starting VNC
 echo export LC_CTYPE=en_US.utf8
 echo export LC_ALL=en_US.utf8
 
