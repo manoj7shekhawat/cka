@@ -20,4 +20,6 @@ echo export LC_ALL=en_US.utf8 | tee -a ~/.bash_profile
 
 echo Make sure to open 5901 in Ingress/Inbound rules
 
+echo use 1920 x 1080 \(16:9\)
+
 echo I am done 
