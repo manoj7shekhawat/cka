@@ -75,7 +75,7 @@ echo Step 12: Checking minikube version
 
 minikube version
 
-echo Step 13: Download kubectl (check path to latest version on dl.k8s.io):
+echo Step 13: Download kubectl \(check path to latest version on dl.k8s.io\):
 
 curl -LO https://dl.k8s.io/release/v1.22.0/bin/linux/amd64/kubectl
 
