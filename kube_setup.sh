@@ -109,4 +109,4 @@ kubectl get pod
 
 kubectl get services
 
-echo I'm done :)
+echo I\'m done :\)
