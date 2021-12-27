@@ -1,2 +1,2 @@
-# cka
-kubernetes
+# Kubernetes
+Learning kubernetes
