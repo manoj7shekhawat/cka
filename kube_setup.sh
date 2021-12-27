@@ -48,9 +48,9 @@ newgrp libvirt
 
 echo STEP 8: Editing libvirtd.conf
 
-sudo echo unix_sock_group = “libvirt” > /etc/libvirt/libvirtd.conf
+echo unix_sock_group = “libvirt” | sudo tee -a /etc/libvirt/libvirtd.conf
 
-sudo echo unix_sock_rw_perms = “0770” > /etc/libvirt/libvirtd.conf
+echo unix_sock_rw_perms = “0770” | sudo tee -a /etc/libvirt/libvirtd.conf
 
 echo STEP 9: Restart the KVM service
 
