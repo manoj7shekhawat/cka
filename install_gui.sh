@@ -6,7 +6,7 @@ sudo yum install tigervnc tigervnc-server -y
 
 sudo firewall-cmd --add-port=5901/tcp
 
-sudo firewall-cmd --add-port=5901/tcp --permanet
+sudo firewall-cmd --add-port=5901/tcp --permanent
 
 sudo firewall-cmd --reload
 
