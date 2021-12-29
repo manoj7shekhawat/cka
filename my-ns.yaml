@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    kubernetes.io/metadata.name: production
+  name: production
+spec:
+  finalizers:
+  - kubernetes
