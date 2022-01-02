@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sidecar-dep
+  name: sidecar-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sidecar-dep
+  template:
+    metadata:
+      labels:
+        app: sidecar-dep
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 15
+          periodSeconds: 20
+      - image: busybox
+        name: busybox
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do echo hello; sleep 10;done"]
+        readinessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 45
+          periodSeconds: 15
