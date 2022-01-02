@@ -1,0 +1,5 @@
+[mshekhawat@myvm ~]$ kubectl get ingress
+NAME         CLASS   HOSTS         ADDRESS     PORTS   AGE
+my-ingress   nginx   foo.bar.com   localhost   80      6s
+[mshekhawat@myvm ~]$ curl foo.bar.com
+<h1>Index.html from MiniKube Node for HTTP Server</h1>
