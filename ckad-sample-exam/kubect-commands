@@ -1,0 +1,13 @@
+kubectl create ns ckad-ns3
+
+kubectl get cm --all-namespaces
+
+
+kubectl get all --all-namespaces --selector=app=nginx
+
+kubectl get deployments.apps --all-namespaces --selector=app=nginx
+
+
+kubectl logs -n ckad-ns3 sidecar-pod -c sec-cont
+
+kubectl describe -n ckad-ns3 pod sidecar-pod

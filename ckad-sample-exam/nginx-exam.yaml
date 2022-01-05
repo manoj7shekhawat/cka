@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: my-nginx
+  name: nginx
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      service: my-nginx
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        service: my-nginx
+        app: webshop
+    spec:
+      containers:
+      - image: nginx:1.8
+        name: nginx
