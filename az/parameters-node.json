@@ -6,7 +6,7 @@
             "value": "germanywestcentral"
         },
         "networkInterfaceName": {
-            "value": "node1740"
+            "value": null
         },
         "enableAcceleratedNetworking": {
             "value": true
@@ -38,10 +38,10 @@
             "value": "/subscriptions/4b69fe87-70fe-4468-b0d4-5217cf11bd7f/resourceGroups/cka/providers/Microsoft.Network/virtualNetworks/cka-vnet"
         },
         "virtualMachineName": {
-            "value": "node2"
+            "value": null
         },
         "virtualMachineComputerName": {
-            "value": "node2"
+            "value": null
         },
         "virtualMachineRG": {
             "value": "cka"
