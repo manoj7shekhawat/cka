@@ -2,7 +2,7 @@
 
 # Date: 06-Jan-2022
 # Author: Manoj Shekhawat
-# This script is written for RHEL 8.5 VM on Azure Cloud
+# This script is written for RHEL 8.5 OR CentOS Linux 8 VM on Azure Cloud
 # This is second part in setting up Kubernetes cluster
 # Before this please run: setup-container.sh
 
@@ -14,7 +14,7 @@ if [ "$EUID" = 0 ]
   exit 3
 fi
 
-if [[ $MYOS =~ ^Red[[:space:]]Hat[[:space:]]Enterprise[[:space:]]Linux[[:space:]]8* ]]
+if [[ $MYOS =~ ^Red[[:space:]]Hat[[:space:]]Enterprise[[:space:]]Linux[[:space:]]8* ]] || [[ $MYOS =~ ^CentOS[[:space:]]Linux[[:space:]]8$ ]]
 then
 	echo Working on: $MYOS
 	
@@ -57,9 +57,9 @@ EOF
 	echo Next Steps:
        	echo 1. On control-plane: As root user: kubeadm init
 	echo 2. On control-plane: Configure the sudo user kube configuration
-	echo 3. On control-plane: Install Weave Net using: kubectl apply -f \"https://cloud.weave.works/k8s/net?k8s-version=\$\(kubectl version \| base64 \| tr -d \'n\'\)\"
+	echo 3. On control-plane: Install Weave Net using: kubectl apply -f \"https://cloud.weave.works/k8s/net?k8s-version=\$\(kubectl version \| base64 \| tr -d \'\\n\'\)\"
 
 	echo 4. On Nodes: As root user run: kubeadm join
 else
-	echo "Script is for Red Hat Linux"
+	echo "Script is for Red Hat Linux 8+ OR CentOS Linux 8 only"
 fi

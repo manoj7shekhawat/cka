@@ -2,7 +2,7 @@
 
 # Date: 06-Jan-2022
 # Author: Manoj Shekhawat
-# This script is written for RHEL 8.5 VM on Azure Cloud
+# This script is written for RHEL 8.5 OR CentOS Linux 8 VM on Azure Cloud
 # This is first part in setting up Kubernetes cluster
 # After this please run: setup-kubetools.sh
 
@@ -14,7 +14,7 @@ if [ "$EUID" -ne 0 ]
   exit 3
 fi
 
-if [[ $MYOS =~ ^Red[[:space:]]Hat[[:space:]]Enterprise[[:space:]]Linux[[:space:]]8* ]]
+if [[ $MYOS =~ ^Red[[:space:]]Hat[[:space:]]Enterprise[[:space:]]Linux[[:space:]]8* ]] || [[ $MYOS =~ ^CentOS[[:space:]]Linux[[:space:]]8$ ]]
 then
 	echo Working on: $MYOS
 	
@@ -63,5 +63,5 @@ then
 
 	echo I am done :-\)
 else
-	echo "Script is for Red Hat Linux"
+	echo "Script is for Red Hat Linux 8+ or CentOS Linux 8 only"
 fi
