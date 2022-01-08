@@ -35,7 +35,7 @@
             "value": "default"
         },
         "virtualNetworkName": {
-            "value": "cka-vnet"
+            "value": null
         },
         "addressPrefixes": {
             "value": [
@@ -68,7 +68,7 @@
             "value": "control-plane"
         },
         "virtualMachineRG": {
-            "value": "cka"
+            "value": null
         },
         "osDiskType": {
             "value": "Premium_LRS"
