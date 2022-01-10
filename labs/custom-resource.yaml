@@ -1,0 +1,8 @@
+apiVersion: stable.example.com/v1
+kind: SslCert
+metadata:
+  name: my-sslcert
+spec:
+  cert: mycertificate
+  key: sslcertificate
+  domain: "*.stable.example.come"
