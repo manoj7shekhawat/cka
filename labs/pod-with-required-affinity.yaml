@@ -1,0 +1,30 @@
+# k taint --help
+# k taint node node2 dedicated=special-user:NoSchedule
+# k describe nodes node2
+# k label nodes node2 disk=ssd
+# k get nodes --show-labels 
+# k create -f pod-with-required-affinity.yaml 
+# k get all -- Pod will be in Pending status
+# k describe pod nginx-affinity 
+# k taint --help
+# k taint node node2 dedicated:NoSchedule-
+# k get all - After taint is removed pod starts running
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-affinity
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: disk
+            operator: In
+            values:
+            - ssd            
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
