@@ -1,0 +1,66 @@
+# Create a new namespace
+# kubectl create ns staff
+# kubectl get ns
+
+
+# First create a Linux User and add it to wheel so that it able to use sudo
+# useradd bob
+# usermod -aG wheel bob
+# passwd bob
+
+# su - bob
+
+# Make kube directory and copy admin.conf
+
+# mkdir .kube
+# cd .kube/
+# sudo cp /etc/kubernetes/admin.conf config
+# sudo chown bob:bob config 
+ 
+# Bob user will be able to create PODs in default namespace
+  
+# kubectl config get-contexts
+# kubectl get pods
+# kubectl create deployment bob-dep --image=nginx
+# kubectl get all
+
+# Generate a bob.key with 2048bit:   
+# openssl genrsa -out bob.key 2048
+   
+# Generate the certificate signing request (CSR)
+# openssl req -new -key bob.key -out bob.csr -subj "/CN=bob/O=staff"
+
+# Generate the server certificate using the ca.key, ca.crt and bob.csr 
+# sudo openssl x509 -req -in bob.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out bob.crt -days 180
+ 
+# Check the Current Config  
+# kubectl config view
+
+# Add User bob to kubernetes
+# kubectl config set-credentials bob --client-certificate bob.crt --client-key bob.key 
+
+# Verify user is added in config
+# kubectl config view
+ 
+# Add a new context: bob-context  
+# kubectl config set-context bob-context --cluster=kubernetes --namespace=staff --user=bob
+
+# Verify the new context is added
+# kubectl config get-contexts
+ 
+# Check the pods in bob-context: It will FAIL currently due to missing Role & RoleBinding  
+# kubectl get pods --context=bob-context
+ 
+# Create a Role  
+# kubectl create -f staff-role.yaml 
+ 
+# Create a RoleBinding  
+# kubectl create -f staff-bob-rolebinding.yaml 
+
+# Now user will be able to create Pod/Deployments
+# kubectl get pods --context=bob-context
+# kubectl create deployment bob-nginx --image=nginx -n staff
+# kubectl get pods --context=bob-context
+ 
+# Check Role  
+# kubectl describe role bob-role -n staff
