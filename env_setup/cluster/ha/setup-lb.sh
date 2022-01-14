@@ -7,7 +7,7 @@
 
 # This script is to set up load balancing on all cluster nodes: Cluster-plane and Worker nodes
 # Used as a practice for use in CKA courses by Sander van Vugt
-# Verified on RHEL 8.5 and CentOS 8.x VMs on Azure Cloud
+# Verified on RHEL 8.5 and CentOS 8.x VMs on Azure Cloud: ONLY WITH 2 CPUs or more AND 4GB RAM or more
 # Please run this AFTER running env_setup/cluster/setup-container.sh and env_setup/cluster/setup-kubetools.sh
 
 echo ##### READ ALL OF THIS BEFORE CONTINUING ######
