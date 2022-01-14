@@ -22,6 +22,14 @@ echo manually change the check_apiserver.sh file before continuing
 echo press enter to continue or Ctrl-c to interrupt and apply modifications
 read
 
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit 3
+fi
+
+if [[ $MYOS =~ ^Red[[:space:]]Hat[[:space:]]Enterprise[[:space:]]Linux[[:space:]]8* ]] || [[ $MYOS =~ ^CentOS[[:space:]]Linux[[:space:]]8$ ]]
+then
+	echo Working on: $MYOS
 # performing check on critical files
 for i in keepalived.conf check_apiserver.sh haproxy.cfg
 do
@@ -59,3 +67,7 @@ echo On Slave control plane as root user: kubeadm join
 echo On Worker node as root user: kubeadm join \( Different kubeadm join Command for workers \)
 
 echo Good Luck :-\)
+
+else
+	echo "Script is for Red Hat Linux 8+ or CentOS Linux 8 only"
+fi
