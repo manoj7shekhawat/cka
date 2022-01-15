@@ -39,13 +39,12 @@ az deployment group create \
 		echo Creating $1 workers
 		for (( c=1; c<=$1; c++ ))
 		do
-			echo Creating node$c VM
+			echo Creating worker$c VM
 az deployment group create \
 --resource-group cka \
 --template-file template.json \
 --parameters \@parameters.json \
 --parameters adminPassword=$2 \
---parameters virtualMachineRG=cka \ 
 --parameters networkInterfaceName=worker173$c \
 --parameters virtualMachineComputerName=worker$c \
 --parameters virtualMachineName=worker$c 
