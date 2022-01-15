@@ -27,6 +27,8 @@ if [ "$EUID" -ne 0 ]
   exit 3
 fi
 
+MYOS=$(hostnamectl | awk -F': ' '/Operating/ { print $2}')
+
 if [[ $MYOS =~ ^Red[[:space:]]Hat[[:space:]]Enterprise[[:space:]]Linux[[:space:]]8* ]] || [[ $MYOS =~ ^CentOS[[:space:]]Linux[[:space:]]8$ ]]
 then
 	echo Working on: $MYOS
