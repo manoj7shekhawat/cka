@@ -8,4 +8,6 @@
 
 5. Job: 4 mins [ Make sure the pod namd matches the requirement else use Pod with restart as Never]
 
+6. Deployment History: 4 mins [--record paramter while using k set image]
 
+7. Labels: 1m [k get all -A --selector k8s-app=kube-dns]
