@@ -1,3 +1,7 @@
 1. Cluster Creation: 8 mins
 
 2. Pod Creation: 4 mins
+
+3. Init Container: 11 mins [Note: Create the needed directory :(]
+
+4. Storage Creation: 12 mins [Note: PVC needs to be in same namespace as the Pod]
