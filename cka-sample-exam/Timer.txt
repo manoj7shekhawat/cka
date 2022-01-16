@@ -14,4 +14,6 @@
 
 8. ConfigMap: 7 mins
 
-9. Daemon Set: 6 mins [ Selector is needed in Daemon set] 
+9. Daemon Set: 6 mins [ Selector is needed in Daemon set]
+
+10. Node Draining: 2 mins 
