@@ -16,4 +16,8 @@
 
 9. Daemon Set: 6 mins [ Selector is needed in Daemon set]
 
-10. Node Draining: 2 mins 
+10. Node Draining: 2 mins
+
+11. Node maintainence: 1 min [k cordon worker2]
+
+12. Back up etcd: 8 mins 
