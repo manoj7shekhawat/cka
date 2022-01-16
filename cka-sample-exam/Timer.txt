@@ -24,4 +24,6 @@
 
 13. DNS: 8 mins [Just create Pod, expose it and verify using nslookup ]
 
-14. Static Pod: 6 mins 
+14. Static Pod: 6 mins
+
+15. Network Policy: 8 mins 

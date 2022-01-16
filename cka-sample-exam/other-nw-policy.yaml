@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: my-busy2
+  name: my-busy2
+  namespace: secure
+spec:
+  containers:
+  - image: busybox
+    name: my-busy
+    command: ["sh", "-c", "while true; do echo hello; sleep 5; done"]
