@@ -20,4 +20,6 @@
 
 11. Node maintainence: 1 min [k cordon worker2]
 
-12. Back up etcd: 8 mins 
+12. Back up etcd: 8 mins
+
+13. DNS: 8 mins [Just create Pod, expose it and verify using nslookup ] 
