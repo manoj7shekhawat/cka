@@ -1,0 +1,3 @@
+1. Cluster Creation: 8 mins
+
+2. Pod Creation: 4 mins
