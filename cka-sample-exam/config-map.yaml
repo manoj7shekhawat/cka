@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-cm
+data:
+  myuser: "mypassword"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: configmap-pod
+spec:
+  containers:
+    - name: demo-pod
+      image: alpine
+      command: ["sleep", "3600"]
+      env:
+        # Define the environment variable
+        - name: my-user # Notice that the case is different here
+          valueFrom:
+            configMapKeyRef:
+              name: my-cm         # The ConfigMap this value comes from.
+              key: myuser # The key to fetch.

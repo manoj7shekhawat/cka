@@ -11,3 +11,5 @@
 6. Deployment History: 4 mins [--record paramter while using k set image]
 
 7. Labels: 1m [k get all -A --selector k8s-app=kube-dns]
+
+8. ConfigMap: 7 mins 
