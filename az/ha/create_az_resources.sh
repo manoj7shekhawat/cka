@@ -2,11 +2,11 @@
 
 # Create AZ resources
 # $0 ResourceGroupName
-# $0 Number of nodes
+# $0 Number of workers
  
 if [ $# != 2 ]
 then
-	echo Usage\; $0 \<ResourceGroupName\/No of nodes\> adminPassword
+	echo Usage\; $0 \<ResourceGroupName\/No of workers\> adminPassword
 else
 	if [[ ! $1 =~ ^[0-9]$ ]]
 	then

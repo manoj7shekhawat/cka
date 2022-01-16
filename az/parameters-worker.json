@@ -12,7 +12,7 @@
             "value": true
         },
         "networkSecurityGroupName": {
-            "value": "node1-nsg"
+            "value": "worker1-nsg"
         },
         "networkSecurityGroupRules": {
             "value": [

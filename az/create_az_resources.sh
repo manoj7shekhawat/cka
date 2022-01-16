@@ -2,11 +2,11 @@
 
 # Create AZ resources
 # $0 ResourceGroupName
-# $0 Number of nodes
+# $0 Number of workers
  
 if [ $# != 2 ]
 then
-	echo Usage\; $0 \<ResourceGroupName\/No of nodes\> adminPassword
+	echo Usage\; $0 \<ResourceGroupName\/No of workers\> adminPassword
 else
 	if [[ ! $1 =~ ^[0-9]$ ]]
 	then
@@ -29,18 +29,18 @@ else
 		az vm list-ip-addresses -g $1 -n control-plane
 
 	else
-		echo Creating $1 nodes
+		echo Creating $1 Workers
 		for (( c=1; c<=$1; c++ ))
 		do
-			echo Creating node$c VM
+			echo Creating Worker$c VM
 			az deployment group create \
 --resource-group cka \
---template-file template-node.json \
---parameters \@parameters-node.json \
+--template-file template-worker.json \
+--parameters \@parameters-worker.json \
 --parameters adminPassword=$2 \
---parameters networkInterfaceName=node173$c \
---parameters virtualMachineComputerName=node$c \
---parameters virtualMachineName=node$c 
+--parameters networkInterfaceName=worker173$c \
+--parameters virtualMachineComputerName=worker$c \
+--parameters virtualMachineName=worker$c 
 		done
 
 		echo Listing IP addresses
