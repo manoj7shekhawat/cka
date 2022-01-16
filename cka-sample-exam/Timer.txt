@@ -5,3 +5,7 @@
 3. Init Container: 11 mins [Note: Create the needed directory :(]
 
 4. Storage Creation: 12 mins [Note: PVC needs to be in same namespace as the Pod]
+
+5. Job: 4 mins [ Make sure the pod namd matches the requirement else use Pod with restart as Never]
+
+
