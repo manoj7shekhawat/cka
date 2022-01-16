@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: my-daemon-set-pod
+  labels:
+    k8s-app: my-daemon-pod
+spec:
+  selector:
+    matchLabels:
+      name: my-daemon-set-pod
+  template:
+    metadata:
+      labels:
+        name: my-daemon-set-pod
+    spec:
+      containers:
+      - name: my-daemon-set-pod
+        image: nginx

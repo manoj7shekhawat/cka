@@ -12,4 +12,6 @@
 
 7. Labels: 1m [k get all -A --selector k8s-app=kube-dns]
 
-8. ConfigMap: 7 mins 
+8. ConfigMap: 7 mins
+
+9. Daemon Set: 6 mins [ Selector is needed in Daemon set] 
