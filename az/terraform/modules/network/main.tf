@@ -22,14 +22,16 @@ resource "azurerm_public_ip" "pip" {
 }
 
 resource "azurerm_network_interface" "nic" {
-  name                = var.network.nic_name
+  for_each = {for vm in var.network.nsg:  vm.nic_name => vm}
+
+  name                = each.key
   location            = var.location
   resource_group_name = var.resource_group_name
 
   ip_configuration {
-    name                          = "external"
+    name                          = each.value.ip_configuration_name
     subnet_id                     = azurerm_subnet.subnet.id
-    public_ip_address_id          = azurerm_public_ip.pip.id
+    public_ip_address_id          = each.key == "control-plane-nic" ? azurerm_public_ip.pip.id : null
     private_ip_address_allocation = "Dynamic"
   }
 
@@ -37,21 +39,26 @@ resource "azurerm_network_interface" "nic" {
 }
 
 resource "azurerm_network_security_group" "nsg" {
-  name                = var.network.nsg.name
+  name                = var.network.nsg[0].nsg_name
   location            = var.location
   resource_group_name = var.resource_group_name
 
   security_rule {
-    name                       = var.network.nsg.security_rule.name
-    priority                   = var.network.nsg.security_rule.priority
-    direction                  = var.network.nsg.security_rule.direction
-    access                     = var.network.nsg.security_rule.access
-    protocol                   = var.network.nsg.security_rule.protocol
-    source_port_range          = var.network.nsg.security_rule.source_port_range
-    destination_port_range     = var.network.nsg.security_rule.destination_port_range
-    source_address_prefix      = var.network.nsg.security_rule.source_address_prefix
-    destination_address_prefix = var.network.nsg.security_rule.destination_address_prefix
+    name                       = var.network.nsg[0].security_rule.name
+    priority                   = var.network.nsg[0].security_rule.priority
+    direction                  = var.network.nsg[0].security_rule.direction
+    access                     = var.network.nsg[0].security_rule.access
+    protocol                   = var.network.nsg[0].security_rule.protocol
+    source_port_range          = var.network.nsg[0].security_rule.source_port_range
+    destination_port_range     = var.network.nsg[0].security_rule.destination_port_range
+    source_address_prefix      = var.network.nsg[0].security_rule.source_address_prefix
+    destination_address_prefix = var.network.nsg[0].security_rule.destination_address_prefix
   }
 
   tags     = var.tags
+}
+
+resource "azurerm_subnet_network_security_group_association" "security_group_association" {
+  subnet_id                 = azurerm_subnet.subnet.id
+  network_security_group_id = azurerm_network_security_group.nsg.id
 }

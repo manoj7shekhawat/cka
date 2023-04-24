@@ -25,8 +25,8 @@ variable "compute" {
   })
 }
 
-variable "network_interface_ids" {
-  type = list(string)
+variable "network_interfaces" {
+  type = any
 }
 
 # TAGS
