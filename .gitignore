@@ -2,3 +2,4 @@
 .idea/*
 az/terraform/bootstrap/.terraform.lock.hcl
 az/terraform/bootstrap/.terraform/*
+az/terraform/bootstrap/terraform.tfstate
