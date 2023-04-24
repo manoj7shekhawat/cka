@@ -12,16 +12,28 @@ resource "azurerm_subnet" "subnet" {
   address_prefixes     = var.network.subnet_address_prefixes
 }
 
+resource "azurerm_public_ip" "pip" {
+  name                = var.network.pip_name
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  allocation_method   = "Static"
+
+  tags     = var.tags
+}
+
 resource "azurerm_network_interface" "nic" {
   name                = var.network.nic_name
   location            = var.location
   resource_group_name = var.resource_group_name
 
   ip_configuration {
-    name                          = "internal"
+    name                          = "external"
     subnet_id                     = azurerm_subnet.subnet.id
+    public_ip_address_id          = azurerm_public_ip.pip.id
     private_ip_address_allocation = "Dynamic"
   }
+
+  tags     = var.tags
 }
 
 resource "azurerm_network_security_group" "nsg" {

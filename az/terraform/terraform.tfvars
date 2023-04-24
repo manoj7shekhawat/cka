@@ -9,6 +9,7 @@ network = {
   subnet_name             = "internal"
   subnet_address_prefixes = ["10.0.2.0/24"]
 
+  pip_name = "my-pip"
   nic_name = "cks-nic"
 
   nsg = {

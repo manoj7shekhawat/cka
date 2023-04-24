@@ -5,12 +5,15 @@ resource "azurerm_linux_virtual_machine" "vm" {
   resource_group_name = var.resource_group_name
   location            = var.location
   size                = var.compute.vm_size
-  admin_username      = var.compute.admin_username
-  admin_password      = var.compute.admin_password
+
+  disable_password_authentication = false
+  admin_username                  = var.compute.admin_username
+  admin_password                  = var.compute.admin_password
 
   network_interface_ids = var.network_interface_ids
 
-  priority = "Spot"
+  priority        = "Spot"
+  eviction_policy = "Delete"
 
   os_disk {
     caching              = var.compute.os_disk.caching

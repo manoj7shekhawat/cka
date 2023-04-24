@@ -14,6 +14,7 @@ variable "network" {
     subnet_name             = string
     subnet_address_prefixes = list(string)
 
+    pip_name = string
     nic_name = string
 
     nsg = object({
