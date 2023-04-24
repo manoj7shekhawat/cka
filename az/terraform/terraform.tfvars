@@ -18,7 +18,7 @@ network = {
 
 compute = {
   vm_names = ["control-plane"]
-  vm_size = "Standard_D2s_v3"
+  vm_size  = "Standard_D2s_v3"
 
   admin_username = "mshekhawat"
 

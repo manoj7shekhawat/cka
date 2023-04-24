@@ -1,15 +1,15 @@
-variable location {
+variable "location" {
   type = string
 }
 
-variable resource_group_name {
+variable "resource_group_name" {
   type = string
 }
 
-variable compute {
+variable "compute" {
   type = object({
-    vm_names = list(string)
-    vm_size = string
+    vm_names       = list(string)
+    vm_size        = string
     admin_username = string
     admin_password = string
     source_image_reference = object({

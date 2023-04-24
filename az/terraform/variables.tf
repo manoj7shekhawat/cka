@@ -4,7 +4,7 @@ variable "resource_groups" {
   }))
 }
 
-variable location {
+variable "location" {
   type = string
 }
 

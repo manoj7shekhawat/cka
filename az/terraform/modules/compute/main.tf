@@ -1,5 +1,5 @@
 resource "azurerm_linux_virtual_machine" "vm" {
-  for_each              = toset(var.compute.vm_names)
+  for_each = toset(var.compute.vm_names)
 
   name                = each.value
   resource_group_name = var.resource_group_name

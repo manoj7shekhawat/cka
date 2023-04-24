@@ -6,7 +6,7 @@ resource "azurerm_resource_group" "example" {
 }
 
 module "network" {
-  source              = "./modules/network"
+  source = "./modules/network"
 
   network             = var.network
   location            = azurerm_resource_group.example.location
