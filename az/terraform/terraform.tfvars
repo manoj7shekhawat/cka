@@ -1,10 +1,6 @@
 location = "North Europe"
 
-resource_groups = {
-  "backend" = {
-    name = "infra"
-  }
-}
+resource_group_name = "infra"
 
 network = {
   vnet_name          = "cks-vnet"
@@ -14,25 +10,6 @@ network = {
   subnet_address_prefixes = ["10.0.2.0/24"]
 
   nic_name = "cks-nic"
-}
-
-compute = {
-  vm_names = ["control-plane"]
-  vm_size  = "Standard_D2s_v3"
-
-  admin_username = "mshekhawat"
-
-  source_image_reference = {
-    publisher = "RedHat"
-    offer     = "RHEL"
-    sku       = "86-gen2"
-    version   = "latest"
-  }
-
-  os_disk = {
-    caching              = "ReadWrite"
-    storage_account_type = "Premium_LRS"
-  }
 
   nsg = {
     name                = "control-plane-nsg"
@@ -47,6 +24,26 @@ compute = {
       source_address_prefix      = "*"
       destination_address_prefix = "*"
     }
+  }
+}
+
+compute = {
+  vm_names = ["control-plane"]
+  vm_size  = "Standard_D2s_v3"
+
+  admin_username = "mshekhawat"
+  admin_password = "Bani@koki"
+
+  source_image_reference = {
+    publisher = "RedHat"
+    offer     = "RHEL"
+    sku       = "86-gen2"
+    version   = "latest"
+  }
+
+  os_disk = {
+    caching              = "ReadWrite"
+    storage_account_type = "Premium_LRS"
   }
 }
 

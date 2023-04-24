@@ -7,7 +7,7 @@ resource "azurerm_virtual_network" "vnet" {
 
 resource "azurerm_subnet" "subnet" {
   name                 = var.network.subnet_name
-  resource_group_name  = resource_group_name
+  resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = var.network.subnet_address_prefixes
 }
@@ -30,15 +30,15 @@ resource "azurerm_network_security_group" "nsg" {
   resource_group_name = var.resource_group_name
 
   security_rule {
-    name                       = var.network.nsg.name
-    priority                   = var.network.nsg.priority
-    direction                  = var.network.nsg.direction
-    access                     = var.network.nsg.access
-    protocol                   = var.network.nsg.protocol
-    source_port_range          = var.network.nsg.source_port_range
-    destination_port_range     = var.network.nsg.destination_port_range
-    source_address_prefix      = var.network.nsg.source_address_prefix
-    destination_address_prefix = var.network.nsg.destination_address_prefix
+    name                       = var.network.nsg.security_rule.name
+    priority                   = var.network.nsg.security_rule.priority
+    direction                  = var.network.nsg.security_rule.direction
+    access                     = var.network.nsg.security_rule.access
+    protocol                   = var.network.nsg.security_rule.protocol
+    source_port_range          = var.network.nsg.security_rule.source_port_range
+    destination_port_range     = var.network.nsg.security_rule.destination_port_range
+    source_address_prefix      = var.network.nsg.security_rule.source_address_prefix
+    destination_address_prefix = var.network.nsg.security_rule.destination_address_prefix
   }
 
   tags     = var.tags

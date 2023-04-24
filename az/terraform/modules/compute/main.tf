@@ -11,7 +11,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   network_interface_ids = var.network_interface_ids
 
   priority = "Spot"
-  
+
   os_disk {
     caching              = var.compute.os_disk.caching
     storage_account_type = var.compute.os_disk.storage_account_type

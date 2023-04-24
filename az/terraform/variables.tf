@@ -1,10 +1,8 @@
-variable "resource_groups" {
-  type = map(object({
-    name = string
-  }))
+variable "location" {
+  type = string
 }
 
-variable "location" {
+variable "resource_group_name" {
   type = string
 }
 
