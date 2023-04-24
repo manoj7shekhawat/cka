@@ -126,9 +126,9 @@
                         }
                     },
                     "imageReference": {
-                        "publisher": "OpenLogic",
-                        "offer": "CentOS",
-                        "sku": "8_4-gen2",
+                        "publisher": "RedHat",
+                        "offer": "RHEL",
+                        "sku": "86-gen2",
                         "version": "latest"
                     }
                 },

@@ -1,1 +1,8 @@
 # exclude everything except directory foo/bar
+.idea/*
+az/terraform/bootstrap/.terraform.lock.hcl
+az/terraform/bootstrap/.terraform/*
+az/terraform/bootstrap/terraform.tfstate
+az/terraform/.terraform.lock.hcl
+az/terraform/.terraform/*
+az/terraform/terraform.tfstate
