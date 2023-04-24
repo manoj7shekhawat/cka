@@ -21,7 +21,7 @@ module "compute" {
   resource_group_name = azurerm_resource_group.rg.name
 
   compute               = var.compute
-  network_interface_ids = [module.network.network_interface_id]
+  network_interfaces    = module.network.network_interfaces
 
   tags = var.tags
 }

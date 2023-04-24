@@ -10,7 +10,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   admin_username                  = var.compute.admin_username
   admin_password                  = var.compute.admin_password
 
-  network_interface_ids = var.network_interface_ids
+  network_interface_ids = [var.network_interfaces[0]["${each.value}-nic"].id]
 
   priority        = "Spot"
   eviction_policy = "Delete"
