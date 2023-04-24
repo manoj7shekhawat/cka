@@ -9,7 +9,11 @@ resource_groups = {
 storage = {
   name             = "mshekhawat"
   tier             = "Standard"
-  replication_type = "RA-GRS"
+  replication_type = "RAGRS"
   container_type   = "private"
-  container_names  = ["cks_tf"]
+  container_names  = ["cks-tf"]
+}
+
+tags = {
+  environment = "cks"
 }
