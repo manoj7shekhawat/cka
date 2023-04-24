@@ -16,35 +16,25 @@ network = {
       nsg_name              = "control-plane-nsg"
       nic_name              = "control-plane-nic"
       ip_configuration_name = "external"
-      security_rule = {
-        name                       = "SSH"
-        priority                   = 300
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "Tcp"
-        source_port_range          = "*"
-        destination_port_range     = "22"
-        source_address_prefix      = "*"
-        destination_address_prefix = "*"
-      }
     },
     {
       nsg_name              = "worker-1-nsg"
       nic_name              = "worker-1-nic"
       ip_configuration_name = "internal"
-      security_rule = {
-        name                       = "SSH"
-        priority                   = 300
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "Tcp"
-        source_port_range          = "*"
-        destination_port_range     = "22"
-        source_address_prefix      = "*"
-        destination_address_prefix = "*"
-      }
     }
   ]
+
+  security_rule = {
+    name                       = "SSH"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
 }
 
 compute = {
