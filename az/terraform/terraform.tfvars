@@ -11,6 +11,7 @@ network = {
 
   pip_name = "my-pip"
 
+  # Needs to updated based on the requirement
   nsg = [
     {
       nsg_name              = "control-plane-nsg"
@@ -38,6 +39,7 @@ network = {
 }
 
 compute = {
+  # Needs to updated based on the requirement
   vms = {
     control_plane = {
       name = "control-plane"
