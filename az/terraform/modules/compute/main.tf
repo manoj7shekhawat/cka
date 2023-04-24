@@ -1,16 +1,16 @@
 resource "azurerm_linux_virtual_machine" "vm" {
-  for_each = toset(var.compute.vm_names)
+  for_each = var.compute.vms
 
-  name                = each.value
+  name                = each.value.name
   resource_group_name = var.resource_group_name
   location            = var.location
-  size                = var.compute.vm_size
+  size                = each.value.size
 
   disable_password_authentication = false
   admin_username                  = var.compute.admin_username
   admin_password                  = var.compute.admin_password
 
-  network_interface_ids = [var.network_interfaces[0]["${each.value}-nic"].id]
+  network_interface_ids = [var.network_interfaces[0]["${each.value.name}-nic"].id]
 
   priority        = "Spot"
   eviction_policy = "Delete"

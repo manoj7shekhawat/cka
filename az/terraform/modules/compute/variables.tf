@@ -8,8 +8,10 @@ variable "resource_group_name" {
 
 variable "compute" {
   type = object({
-    vm_names       = list(string)
-    vm_size        = string
+    vms = map(object({
+      name = string
+      size = string
+    }))
     admin_username = string
     admin_password = string
     source_image_reference = object({

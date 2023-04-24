@@ -38,11 +38,19 @@ network = {
 }
 
 compute = {
-  vm_names = ["control-plane", "worker-1"]
-  vm_size  = "Standard_DS1_v2"
+  vms = {
+    control_plane = {
+      name = "control-plane"
+      size = "Standard_D2s_v3"
+    },
+    worker_1 = {
+      name = "worker-1"
+      size = "Standard_DS1_v2"
+    }
+  }
 
   admin_username = "mshekhawat"
-  admin_password = "Bani@koki"
+  admin_password = "Welcome@123"
 
   source_image_reference = {
     publisher = "RedHat"
