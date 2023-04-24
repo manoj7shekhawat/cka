@@ -28,3 +28,10 @@ variable "compute" {
 variable "network_interface_ids" {
   type = list(string)
 }
+
+# TAGS
+variable "tags" {
+  type = object({
+    environment            = string
+  })
+}

@@ -17,3 +17,10 @@ variable "compute" {
   type        = any
   description = "Input object for compute resources."
 }
+
+# TAGS
+variable "tags" {
+  type = object({
+    environment            = string
+  })
+}

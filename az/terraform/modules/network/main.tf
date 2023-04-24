@@ -23,3 +23,23 @@ resource "azurerm_network_interface" "nic" {
     private_ip_address_allocation = "Dynamic"
   }
 }
+
+resource "azurerm_network_security_group" "nsg" {
+  name                = var.network.nsg.name
+  location            = var.location
+  resource_group_name = var.resource_group_name
+
+  security_rule {
+    name                       = var.network.nsg.name
+    priority                   = var.network.nsg.priority
+    direction                  = var.network.nsg.direction
+    access                     = var.network.nsg.access
+    protocol                   = var.network.nsg.protocol
+    source_port_range          = var.network.nsg.source_port_range
+    destination_port_range     = var.network.nsg.destination_port_range
+    source_address_prefix      = var.network.nsg.source_address_prefix
+    destination_address_prefix = var.network.nsg.destination_address_prefix
+  }
+
+  tags     = var.tags
+}

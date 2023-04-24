@@ -33,4 +33,23 @@ compute = {
     caching              = "ReadWrite"
     storage_account_type = "Premium_LRS"
   }
+
+  nsg = {
+    name                = "control-plane-nsg"
+    security_rule = {
+      name                       = "SSH"
+      priority                   = 300
+      direction                  = "Inbound"
+      access                     = "Allow"
+      protocol                   = "Tcp"
+      source_port_range          = "*"
+      destination_port_range     = "22"
+      source_address_prefix      = "*"
+      destination_address_prefix = "*"
+    }
+  }
+}
+
+tags = {
+  environment = "cks"
 }
