@@ -6,6 +6,8 @@
 # This is second part in setting up Kubernetes cluster
 # Before this please run: setup-container.sh
 
+# For Kubernetes v1.26.3
+VERSION=1.26.3
 
 MYOS=$(hostnamectl | awk -F': ' '/Operating/ { print $2}')
 
@@ -53,8 +55,8 @@ EOF
 	sudo setenforce 0
 	sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 
-	echo Step 4: Installing: kubelet kubeadm kubectl
-	sudo dnf install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+	echo Step 4: Installing: kubelet-$VERSION kubeadm-$VERSION kubectl-$VERSION
+	sudo dnf install -y kubelet-$VERSION kubeadm-$VERSION kubectl-$VERSION --disableexcludes=kubernetes
 
 	echo Step 5: Enabling Kubelet service
 	sudo systemctl enable --now kubelet
