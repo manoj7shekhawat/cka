@@ -8,7 +8,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
 
   disable_password_authentication = false
   admin_username                  = var.compute.admin_username
-  admin_password                  = var.compute.admin_password
+  admin_password                  = var.admin_password
 
   network_interface_ids = [var.network_interfaces[0]["${each.value.name}-nic"].id]
 

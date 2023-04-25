@@ -52,7 +52,6 @@ compute = {
   }
 
   admin_username = "mshekhawat"
-  admin_password = "Welcome@123"
 
   source_image_reference = {
     publisher = "RedHat"

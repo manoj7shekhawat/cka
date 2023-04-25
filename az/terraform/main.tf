@@ -21,6 +21,7 @@ module "compute" {
   resource_group_name = azurerm_resource_group.rg.name
 
   compute               = var.compute
+  admin_password        = var.admin_password
   network_interfaces    = module.network.network_interfaces
 
   tags = var.tags
