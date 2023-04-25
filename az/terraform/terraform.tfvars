@@ -11,48 +11,47 @@ network = {
 
   pip_name = "my-pip"
 
+  # Needs to updated based on the requirement
   nsg = [
     {
       nsg_name              = "control-plane-nsg"
       nic_name              = "control-plane-nic"
       ip_configuration_name = "external"
-      security_rule = {
-        name                       = "SSH"
-        priority                   = 300
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "Tcp"
-        source_port_range          = "*"
-        destination_port_range     = "22"
-        source_address_prefix      = "*"
-        destination_address_prefix = "*"
-      }
     },
     {
       nsg_name              = "worker-1-nsg"
       nic_name              = "worker-1-nic"
       ip_configuration_name = "internal"
-      security_rule = {
-        name                       = "SSH"
-        priority                   = 300
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "Tcp"
-        source_port_range          = "*"
-        destination_port_range     = "22"
-        source_address_prefix      = "*"
-        destination_address_prefix = "*"
-      }
     }
   ]
+
+  security_rule = {
+    name                       = "SSH"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
 }
 
 compute = {
-  vm_names = ["control-plane", "worker-1"]
-  vm_size  = "Standard_DS1_v2"
+  # Needs to updated based on the requirement
+  vms = {
+    control_plane = {
+      name = "control-plane"
+      size = "Standard_D2s_v3"
+    },
+    worker_1 = {
+      name = "worker-1"
+      size = "Standard_DS1_v2"
+    }
+  }
 
   admin_username = "mshekhawat"
-  admin_password = "Bani@koki"
 
   source_image_reference = {
     publisher = "RedHat"

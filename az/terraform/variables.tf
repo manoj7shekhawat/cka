@@ -16,6 +16,13 @@ variable "compute" {
   description = "Input object for compute resources."
 }
 
+variable "admin_password" {
+  type = string
+  default   = "Welcome@123"
+  nullable  = false
+  sensitive = true
+}
+
 # TAGS
 variable "tags" {
   type = object({

@@ -8,10 +8,11 @@ variable "resource_group_name" {
 
 variable "compute" {
   type = object({
-    vm_names       = list(string)
-    vm_size        = string
+    vms = map(object({
+      name = string
+      size = string
+    }))
     admin_username = string
-    admin_password = string
     source_image_reference = object({
       publisher = string
       offer     = string
@@ -27,6 +28,12 @@ variable "compute" {
 
 variable "network_interfaces" {
   type = any
+}
+
+variable "admin_password" {
+  type = string
+  nullable  = false
+  sensitive = true
 }
 
 # TAGS

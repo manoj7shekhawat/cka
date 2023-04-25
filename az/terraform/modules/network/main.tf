@@ -44,15 +44,15 @@ resource "azurerm_network_security_group" "nsg" {
   resource_group_name = var.resource_group_name
 
   security_rule {
-    name                       = var.network.nsg[0].security_rule.name
-    priority                   = var.network.nsg[0].security_rule.priority
-    direction                  = var.network.nsg[0].security_rule.direction
-    access                     = var.network.nsg[0].security_rule.access
-    protocol                   = var.network.nsg[0].security_rule.protocol
-    source_port_range          = var.network.nsg[0].security_rule.source_port_range
-    destination_port_range     = var.network.nsg[0].security_rule.destination_port_range
-    source_address_prefix      = var.network.nsg[0].security_rule.source_address_prefix
-    destination_address_prefix = var.network.nsg[0].security_rule.destination_address_prefix
+    name                       = var.network.security_rule.name
+    priority                   = var.network.security_rule.priority
+    direction                  = var.network.security_rule.direction
+    access                     = var.network.security_rule.access
+    protocol                   = var.network.security_rule.protocol
+    source_port_range          = var.network.security_rule.source_port_range
+    destination_port_range     = var.network.security_rule.destination_port_range
+    source_address_prefix      = var.network.security_rule.source_address_prefix
+    destination_address_prefix = var.network.security_rule.destination_address_prefix
   }
 
   tags     = var.tags
