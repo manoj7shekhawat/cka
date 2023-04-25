@@ -7,6 +7,8 @@
 # After this please run: setup-kubetools.sh
 # Last modified: 25-Apr-2023
 
+# For Kubernetes v1.26.x
+VERSION=1.26
 
 MYOS=$(hostnamectl | awk -F': ' '/Operating/ { print $2}')
 
@@ -27,47 +29,27 @@ then
 
   dnf remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-engine podman runc
 
-	echo Step 3: Installing vim yum-utils device-mapper-persistent-data lvm2
+	echo Step 3: Installing vim yum-utils iproute-tc
 
-	dnf install -y vim yum-utils device-mapper-persistent-data lvm2
+	dnf install -y vim yum-utils iproute-tc
 
-	echo Step 4: Adding Docker repository
-	dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+	echo Step 4: Adding CRI-O repository
+	curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable.repo https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/CentOS_8/devel:kubic:libcontainers:stable.repo
+	curl -L -o /etc/yum.repos.d/devel:kubic:libcontainers:stable:cri-o:$VERSION.repo https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:$VERSION/CentOS_8/devel:kubic:libcontainers:stable:cri-o:$VERSION.repo
 
-	echo Step 5: Installing Docker-CE
-	dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+	echo Step 5: Installing cri-o
+	dnf install -y cri-o
 
-	echo Step 6: Creating required directories
-	[ ! -d /etc/docker ] && mkdir /etc/docker
-
-	mkdir -p /etc/systemd/system/docker.service.d
-
-	echo Step 7: Creating daemon.json under /etc/docker
-
-	cat > /etc/docker/daemon.json <<- EOF
-	{
-	  "exec-opts": ["native.cgroupdriver=systemd"],
-	  "log-driver": "json-file",
-	  "log-opts": {
-	    "max-size": "100m"
-	  },
-	  "storage-driver": "overlay2",
-	  "storage-opts": [
-	    "overlay2.override_kernel_check=true"
-	  ]
-	}
-	EOF
-
-	echo Step 8: Reloading daemon
+	echo Step 6: Reloading daemon
 	systemctl daemon-reload
 
-	echo Step 9: Restarting Docker
-	systemctl restart docker
+	echo Step 7: Enabling crio
+	systemctl enable --now crio
 
-	echo Step 10: Enabling Docker
-	systemctl enable docker
+	echo Step 8: Restarting crio
+  systemctl restart crio
 
-	echo Step 11: Disabling Firewalld
+	echo Step 9: Disabling Firewalld
 	systemctl disable --now firewalld
 
 	echo I am done :-\)
