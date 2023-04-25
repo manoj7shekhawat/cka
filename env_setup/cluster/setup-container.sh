@@ -32,7 +32,7 @@ then
 	dnf install -y vim yum-utils device-mapper-persistent-data lvm2
 
 	echo Step 4: Adding Docker repository
-	dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
+	dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
 	echo Step 5: Installing Docker-CE
 	dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
